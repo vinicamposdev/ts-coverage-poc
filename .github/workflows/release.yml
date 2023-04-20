@@ -1,10 +1,7 @@
 # Reusable workflow for releases; to eject, you can replace this file with
 # https://github.com/ryansonshine/ryansonshine/blob/main/.github/workflows/release.yml
 name: Release
-on:
-  push:
-    branches:
-      - main
+on: ["push", "pull_request"]
 jobs:
   release:
     permissions:
@@ -14,3 +11,26 @@ jobs:
     uses: ryansonshine/ryansonshine/.github/workflows/release.yml@main
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Node 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm run test
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        # with:
+        #   github-token: ${{ secrets.GITHUB_TOKEN }}
+        #   flag-name: ${{matrix.os}}-node-${{ matrix.node }}
+        #   parallel: true
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3

@@ -6,6 +6,7 @@ module.exports = {
     '<rootDir>/src/**/*.ts',
     '!<rootDir>/src/types/**/*.ts',
   ],
+  coverageReporters: ['text', 'cobertura', 'lcov', 'html'],
   globals: {
     'ts-jest': {
       diagnostics: false,
