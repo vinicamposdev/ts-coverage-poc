@@ -9,5 +9,11 @@ describe('index', () => {
 
       expect(result).toMatch(message);
     });
+
+    it('should return a string with empty space when dont provide a message', () => {
+      const result = myPackage();
+
+      expect(result).toMatch(' from my package');
+    });
   });
 });
