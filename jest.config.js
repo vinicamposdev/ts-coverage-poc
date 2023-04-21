@@ -7,6 +7,7 @@ module.exports = {
     '!<rootDir>/src/types/**/*.ts',
   ],
   coverageReporters: ['text', 'cobertura', 'lcov', 'html'],
+  testResultsProcessor: 'jest-sonar-reporter',
   globals: {
     'ts-jest': {
       diagnostics: false,
